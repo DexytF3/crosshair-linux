@@ -14,8 +14,6 @@ set -euo pipefail
 
 APP_NAME="Crosshair Linux"
 BIN_NAME="crosshair-linux"
-# The desktop file name and icon name must match the GApplication ID so that
-# the dock (GNOME/KDE on Wayland) can associate the window with its icon.
 APP_ID="io.github.crosshairlinux.CrosshairLinux"
 ICON_NAME="$APP_ID"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -29,7 +27,6 @@ ICON_SVG_DIR="$ICON_ROOT/scalable/apps"
 
 BIN_DEST="$BIN_DIR/$BIN_NAME"
 DESKTOP_DEST="$APPS_DIR/$APP_ID.desktop"
-# Older installs used the binary name; remove those during install/uninstall.
 LEGACY_DESKTOP="$APPS_DIR/$BIN_NAME.desktop"
 ICON_PNG_DEST="$ICON_PNG_DIR/$ICON_NAME.png"
 ICON_SVG_DEST="$ICON_SVG_DIR/$ICON_NAME.svg"
@@ -117,9 +114,6 @@ rm -f "$LEGACY_DESKTOP" "$LEGACY_ICON_PNG" "$LEGACY_ICON_SVG"
 
 # --- Application menu shortcut ---------------------------------------------
 mkdir -p "$APPS_DIR"
-# Write the shortcut atomically. A half-written/truncated .desktop file can
-# crash menu implementations that watch the applications directory: GNOME
-# Shell's GMenu (used by ArcMenu) NULL-derefs while the file is empty.
 DESKTOP_TMP="$(mktemp "$APPS_DIR/.$APP_ID.desktop.XXXXXX")"
 trap 'rm -f "$DESKTOP_TMP"' EXIT
 cat > "$DESKTOP_TMP" <<EOF
