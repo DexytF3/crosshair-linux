@@ -192,6 +192,11 @@ CROSSHAIR_BACKEND=x11 crosshair-linux
 CROSSHAIR_BACKEND=wayland crosshair-linux
 ```
 
+## Contributors
+
+- **Dexytf3** — creator and maintainer
+- **[opencode](https://opencode.ai)** — AI coding assistant used to build and refine the app
+
 ## Attribution
 
 - Inspired by [**Dilates Crosshair**](https://github.com/dilates/crosshair) (Electron original)
